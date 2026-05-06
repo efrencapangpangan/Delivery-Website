@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FastTrack Delivery Services</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; }
+    header { background: #0a3d62; color: white; padding: 20px; text-align: center; }
+    nav { background: #3c6382; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    section { padding: 40px; }
+    .services, .contact, .booking { background: #f4f4f4; }
+    footer { background: #0a3d62; color: white; text-align: center; padding: 15px; }
+    .btn { background: #e58e26; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; }
+    .form-container { max-width: 600px; margin: auto; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>FastTrack Delivery Services</h1>
+  <p>Reliable. Fast. Secure.</p>
+</header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#booking">Booking</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="home">
+  <h2>Welcome to FastTrack</h2>
+  <p>We provide fast and reliable delivery services for contractors and businesses.</p>
+  <button class="btn" onclick="document.getElementById('booking').scrollIntoView()">Book a Delivery</button>
+</section>
+
+<section id="services" class="services">
+  <h2>Our Services</h2>
+  <ul>
+    <li>Same-Day Delivery</li>
+    <li>Scheduled Delivery</li>
+    <li>Bulk Item Transport</li>
+    <li>Contractor Delivery Support</li>
+  </ul>
+</section>
+
+<section id="about">
+  <h2>About Us</h2>
+  <p>FastTrack Delivery Services is dedicated to helping contractors deliver efficiently.</p>
+</section>
+
+<section id="booking" class="booking">
+  <h2>Book a Delivery</h2>
+  <div class="form-container">
+    <form id="bookingForm">
+      <label>Full Name</label>
+      <input type="text" id="name" required>
+
+      <label>Phone Number</label>
+      <input type="text" id="phone" required>
+
+      <label>Pickup Address</label>
+      <input type="text" id="pickup" required>
+
+      <label>Delivery Address</label>
+      <input type="text" id="delivery" required>
+
+      <label>Delivery Type</label>
+      <select id="type">
+        <option>Same-Day</option>
+        <option>Scheduled</option>
+        <option>Bulk Delivery</option>
+      </select>
+
+      <label>Preferred Date</label>
+      <input type="date" id="date" required>
+
+      <label>Additional Notes</label>
+      <textarea id="notes"></textarea>
+
+      <button class="btn" type="submit">Submit Booking</button>
+    </form>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contact Us</h2>
+  <p>Email: fasttrack@email.com</p>
+  <p>Phone: +63 900 000 0000</p>
+  <p>Location: Philippines</p>
+</section>
+
+<footer>
+  <p>© 2026 FastTrack Delivery Services. All Rights Reserved.</p>
+</footer>
+
+<script>
+  const scriptURL = "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE";
+
+  document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const data = {
+      name: document.getElementById("name").value,
+      phone: document.getElementById("phone").value,
+      pickup: document.getElementById("pickup").value,
+      delivery: document.getElementById("delivery").value,
+      type: document.getElementById("type").value,
+      date: document.getElementById("date").value,
+      notes: document.getElementById("notes").value
+    };
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(response => {
+      alert("Booking submitted successfully!");
+      document.getElementById("bookingForm").reset();
+    })
+    .catch(error => {
+      alert("Error submitting booking.");
+      console.error(error);
+    });
+  });
+</script>
+
+</body>
+</html>
